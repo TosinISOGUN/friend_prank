@@ -35,7 +35,10 @@ export default function Index() {
   const noBtnRef = useRef<HTMLButtonElement>(null);
 
   const yesScale = 1 + noCount * 0.15;
-  const noLabel = NO_TEXTS[Math.min(noCount, NO_TEXTS.length - 1)];
+  const noLabel =
+    noCount === 0
+      ? NO_TEXTS[0]
+      : NO_TEXTS[((noCount - 1) % (NO_TEXTS.length - 1)) + 1];
 
   const getRandomNoPosition = useCallback(() => {
     const container = containerRef.current;
