@@ -244,18 +244,8 @@ export default function Index() {
               className="text-lg font-bold"
               style={{ color: "hsl(var(--muted-foreground))" }}
             >
-              We're officially best friends now! 💖
+              We're officially friends now! 💖
             </p>
-            {/* <div className="flex gap-2 text-3xl animate-bounce-loop">
-              {"💖🌟🎊✨🎉".split("").map((em, i) => (
-                <span
-                  key={i}
-                  style={{ animationDelay: `${i * 0.15}s` }}
-                >
-                  {em}
-                </span>
-              ))}
-            </div> */}
           </div>
         )}
       </div>
