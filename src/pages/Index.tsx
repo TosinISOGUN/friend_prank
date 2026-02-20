@@ -25,6 +25,7 @@ interface FloatingEmoji {
 
 export default function Index() {
   const [noCount, setNoCount] = useState(0);
+  const [labelIndex, setLabelIndex] = useState(0);
   const [accepted, setAccepted] = useState(false);
   const [noPos, setNoPos] = useState<{ x: number; y: number } | null>(null);
   const [wiggle, setWiggle] = useState(false);
@@ -35,10 +36,11 @@ export default function Index() {
   const noBtnRef = useRef<HTMLButtonElement>(null);
 
   const yesScale = 1 + noCount * 0.15;
-  const noLabel =
-    noCount === 0
-      ? NO_TEXTS[0]
-      : NO_TEXTS[((noCount - 1) % (NO_TEXTS.length - 1)) + 1];
+  const noLabel = NO_TEXTS[labelIndex];
+
+  // Cycle through indices 1–9 (looping back to 1), skipping the initial "No"
+  const advanceLabel = () =>
+    setLabelIndex((prev) => (prev % (NO_TEXTS.length - 1)) + 1);
 
   const getRandomNoPosition = useCallback(() => {
     const container = containerRef.current;
@@ -68,6 +70,7 @@ export default function Index() {
 
   const handleNoClick = () => {
     setNoCount((c) => c + 1);
+    advanceLabel();
     setWiggle(true);
     setTimeout(() => setWiggle(false), 400);
     getRandomNoPosition();
@@ -75,6 +78,7 @@ export default function Index() {
 
   const handleNoHover = () => {
     if (noCount > 0) {
+      advanceLabel();
       getRandomNoPosition();
     }
   };
